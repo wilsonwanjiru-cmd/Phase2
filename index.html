@@ -349,6 +349,67 @@
             header h1 {
                 font-size: 1.5em;
             }
+            /* styles */
+            header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        code {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            display: block;
+            overflow-x: auto;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+        /* styles */
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        code {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            display: block;
+            overflow-x: auto;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
 
         
     </style>
@@ -1051,6 +1112,121 @@ function App() {
                 &nbsp;&nbsp;&lt;div&gt;Naturally, I agree with this article.&lt;/div&gt;<br>
                 &lt;/div&gt;
             </code>
+        </section>
+    </main>
+    <main>
+        <img src="https://curriculum-content.s3.amazonaws.com/react/component-article-comment-example.png" alt="Example Image">
+    </main>
+    <header>
+        <h1>Naming Components Example</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>This unpacks logically.</h2>
+            <p>The App component (being our top-level component) wraps around both Article and Comment, and we already know what they look like when they are turned into HTML.</p>
+
+            <p>As you may expect, we refer to the App component as both the Comment and Article component's parent component. Inversely, we refer to Comment and Article as children components of App.</p>
+        </section>
+
+        <section>
+            <h2>Naming Components</h2>
+            <p>You'll notice that both of the custom components we created, Article and Comment, are declared as functions whose names start with a capital letter:</p>
+
+            <code>
+                function Article() {<br>
+                &nbsp;&nbsp;return (<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;Dear Reader: Bjarne Stroustrup has the perfect lecture oration.&lt;/div&gt;<br>
+                &nbsp;&nbsp;);<br>
+                }<br><br>
+                function Comment() {<br>
+                &nbsp;&nbsp;return &lt;div&gt;Naturally, I agree with this article.&lt;/div&gt;;<br>
+                }
+            </code>
+
+            <p>This naming convention is important for a couple very good reasons:</p>
+            <ul>
+                <li>It helps React developers to easily differentiate between regular JavaScript functions and React components</li>
+                <li>More importantly, it's a rule that we must follow in order for React to render our components correctly.</li>
+            </ul>
+
+            <p>For instance, if we defined our Article component using a lowercase letter, like this:</p>
+
+            <code>
+                function article() {<br>
+                &nbsp;&nbsp;return &lt;div&gt;Dear Reader: Bjarne Stroustrup has the perfect lecture oration.&lt;/div&gt;;<br>
+                }
+            </code>
+
+            <p>When it came time to use that component within another component, React would treat it as a regular &lt;article&gt; HTML element rather than one of our custom components:</p>
+
+            <code>
+                function App() {<br>
+                &nbsp;&nbsp;return (<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;article /&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                &nbsp;&nbsp;);<br>
+                }<br><br>
+                // returns these DOM elements:<br>
+                // &lt;div&gt;<br>
+                //  &lt;article /&gt;<br>
+                // &lt;/div&gt;
+            </code>
+
+            <p>By giving it a name with a capital letter instead, we get the desired DOM elements returned:</p>
+
+            <code>
+                function App() {<br>
+                &nbsp;&nbsp;return (<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Article /&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                &nbsp;&nbsp;);<br>
+                }<br><br>
+                // returns these DOM elements:<br>
+                // &lt;div&gt;<br>
+                //  &lt;div&gt;Dear Reader: Bjarne Stroustrup has the perfect lecture oration.&lt;/div&gt;<br>
+                // &lt;/div&gt;
+            </code>
+        </section>
+    </main>
+    <header>
+        <h1>React Components Example</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>A Note on Classes</h2>
+            <p>As you're exploring the React documentation, and finding other resources on React on the internet, you'll probably notice there are multiple syntaxes you can use for creating components: function components and class components.</p>
+
+            <p>A function component looks like this:</p>
+
+            <code>
+                function Comment() {<br>
+                &nbsp;&nbsp;return &lt;div&gt;Naturally, I agree with this article.&lt;/div&gt;;<br>
+                }<br><br>
+                {/* Or using the arrow function syntax: */}
+                const Comment = () =&gt; &lt;div&gt;Naturally, I agree with this article.&lt;/div&gt;;
+            </code>
+
+            <p>A class component looks like this:</p>
+
+            <code>
+                class Comment extends React.Component {<br>
+                &nbsp;&nbsp;render() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return &lt;div&gt;Naturally, I agree with this article.&lt;/div&gt;;<br>
+                &nbsp;&nbsp;}<br>
+                }
+            </code>
+
+            <p>For many years, the only way to work with certain key features of React — state and lifecycle — was to use class components. Since the introduction of hooks in React 16.8, this is no longer true, and function components can be used for (almost) everything that class components can.</p>
+
+            <p>React's recommendation is that components should be written as function components moving forward, but class components will continue to be supported as well. React is also planning to rewrite their documentation to focus on function components and hooks in the near future.</p>
+
+            <p>In the meantime, you can also view a community-made version of the React docs that shows all examples with function components.</p>
+
+            <p>You'll learn more about class components later on, so that when you encounter them in legacy code, you'll still be able to work with them. However, for the time being, we'll just be focusing on function components.</p>
         </section>
     </main>
   </body>
